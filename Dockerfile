@@ -5,10 +5,10 @@ RUN adduser --disabled-password pynecone
 
 FROM base as build
 
-WORKDIR /app
-ENV VIRTUAL_ENV=/app/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+WORKDIR .
+#ENV VIRTUAL_ENV=/app/venv
+#RUN python3 -m venv $VIRTUAL_ENV
+#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 COPY . .
 
@@ -28,24 +28,25 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PATH="/app/venv/bin:$PATH"
+#ENV PATH="$PATH:$PATH"
 
 
 FROM runtime as init
 
-WORKDIR /app
-ENV BUN_INSTALL="/app/.bun"
-COPY --from=build /app/ /app/
-#RUN pc init
+WORKDIR .
+#ENV BUN_INSTALL="/.bun"
+COPY --from=build . .
+
+RUN pc init
 
 
 FROM runtime
 
-COPY --chown=pynecone --from=init /app/ /app/
+COPY --chown=pynecone --from=init . .
 USER pynecone
-WORKDIR /app
+WORKDIR .
 
-CMD ["pc","run" , "--env", "prod"]
+CMD ["pc","run" , "--port", "9000"]
 
 EXPOSE 3000
-EXPOSE 8000
+EXPOSE 9000
