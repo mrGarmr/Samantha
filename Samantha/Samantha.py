@@ -5,9 +5,12 @@ import time
 import asyncio
 
 from samantha_nn import handel_image
+
 # openai.api_key = "YOUR_API_KEY"
 
 color = "rgb(107,99,246)"
+
+telegtam_url = 'https://t.me/Samantha_aibot'
 
 
 # def handel_image(image_path):
@@ -95,7 +98,8 @@ class State(pc.State):
             self.image_processing = False
             self.image_made = True
             # print(self.image_made, self.image_processing)
-        except Exception:
+        except Exception as err:
+            print(f'ERROR: {err}')
             self.image_processing = False
             return pc.window_alert("Error with Samantha Execution.")
 
@@ -117,17 +121,35 @@ def index():
             pc.divider(),
             # pc.image(src=State.img, height="18em", width="18em", ),
             # pc.divider(),
+            pc.cond(State.image_processing,
+                    pc.circular_progress(is_indeterminate=True),),
             pc.cond(State.image_made,
                     pc.image(src=State.img, height="18em", width="18em", ), ),
             pc.divider(),
             pc.cond(State.image_made,
-                    pc.badge("Samantha recognized the image as:", variant="subtle", color_scheme="yellow"),
+                    pc.badge("Samantha recognized the image:", variant="subtle", color_scheme="yellow"),
                     # pc.circular_progress(is_indeterminate=True),
                     ),
             pc.cond(
                 State.image_made,
-                pc.text(State.answer, padding="2em", ),
-            ), ),
+                pc.span(State.answer, padding="2em", size="md", font_weight="bold", ),
+            ),
+            pc.cond(
+                State.image_made,
+                pc.link(
+                    "Try via Telegram",
+                    href=telegtam_url,
+                    bg="white",
+                    color=color,
+                    border="0.1em solid",
+                    padding="0.9em",
+                    border_radius="0.9em",
+                    _hover={
+                        "color": color,  # "rgb(107,99,246)"
+                    },
+                ),
+            ),
+        ),
         width="100%",
         height="100vh",
         background="radial-gradient(circle at 22% 11%,rgba(62, 180, 137,.20),hsla(0,0%,100%,0) 19%),radial-gradient(circle at 82% 25%,rgba(33,150,243,.18),hsla(0,0%,100%,0) 35%),radial-gradient(circle at 25% 61%,rgba(250, 128, 114, .28),hsla(0,0%,100%,0) 55%)",
