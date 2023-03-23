@@ -1,8 +1,7 @@
 import pynecone as pc
 
 config = pc.Config(
-    app_name="app",
-    api_url="0.0.0.0:8000",
-    bun_path="/app/.bun/bin/bun",
+    app_name="Samantha",
     db_url="sqlite:///pynecone.db",
+    env=pc.Env.DEV,
 )
