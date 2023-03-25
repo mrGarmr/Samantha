@@ -4,6 +4,9 @@ import wget
 
 from keras.models import load_model
 from os.path import exists
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def load_image(filename):

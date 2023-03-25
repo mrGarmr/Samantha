@@ -1,5 +1,7 @@
 from mongoengine import connect
 from dotenv import dotenv_values
+import certifi
+ca = certifi.where()
 
 
 """Settings"""
@@ -10,4 +12,4 @@ cluster = config['MONGODB_CLUSTER']
 db_name = config['MONGODB_DB_NAME']
 
 """Підключення за допомогою ODM mongoengine"""
-connect(host=f"mongodb+srv://{username}:{password}@{cluster}/{db_name}?authSource=admin&ssl=true")
+connect(host=f"mongodb+srv://{username}:{password}@{cluster}/{db_name}?authSource=admin&ssl=true", tlsCAFile=ca)
