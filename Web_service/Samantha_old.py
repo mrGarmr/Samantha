@@ -4,17 +4,17 @@ import pynecone as pc
 import time
 import asyncio
 
-# from samantha_nn import handel_image
+from samantha_nn import handel_image
 # openai.api_key = "YOUR_API_KEY"
 
 color = "rgb(107,99,246)"
 
 
-def handel_image(image_path):
-    """Функція обробки зображеня нейромережею"""
-    # await asyncio.sleep(5)
-    time.sleep(5)
-    return f"This is {image_path}"
+# def handel_image(image_path):
+#     """Функція обробки зображеня нейромережею"""
+#     # await asyncio.sleep(5)
+#     time.sleep(5)
+#     return f"This is {image_path}"
 
 
 class State(pc.State):

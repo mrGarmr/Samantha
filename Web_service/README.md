@@ -1,4 +1,6 @@
 # Samantha IA 
+## Init project
+```pc init```
 
 ## Launch server 
 ```pc run --port 8090 --loglevel info```
