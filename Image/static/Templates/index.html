@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=3.0" />
+    <title>Personal assistant</title>
+    <link rel="stylesheet" href="../static/css/landingcss.css" />
+<html>
+
+
+
+<div class="container">
+  <h1>Image Recognition</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="image" class="form-label">Upload Image</label>
+      <input type="file" class="form-control" id="image" name="image">
+    </div>
+    <button type="submit" class="btn btn-primary">Recognize Image</button>
+  </form>
+  <hr>
+
+{% if images %}
+  										{% csrf_token %}
+
+
+
+    {% load static %}
+      <h2>{{result}}</h2>
+
+<img src="{{last.name.url}}" width="100" alt="{{ last.name }}">
+<hr style="border: 2px solid blue;">
+
+
+
+
+  <h1>Last 10 pictures that were recognised</h1>
+<hr style="border: 2px solid blue;">
+
+  {% for image in images %}
+
+<img src="{{image.name.url}}" height="200px" width="200px" alt="{{ image.name }}">
+     <figcaption>"{{ image.prediction }}"</figcaption>
+
+{% endfor %}
+
+
+
+  {% endif %}
+
+</body>
+</div>
+</head>
+
+
+{% endblock %}

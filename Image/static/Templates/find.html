@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/find.css" />
+    <script
+      src="https://kit.fontawesome.com/188eb5eaaf.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+
+      <div class="main_content">
+        <div class="header">
+          <h1>You looked for:</h1>
+
+            <div class="nav_icons">
+
+              <div class="links">
+              <ul>
+                 <li><a href="{{url_for('main_table')}}" class="btn" >Back</a></li>
+              </ul>
+              </div>
+            </div>
+        </div>
+
+
+
+    <table>
+      {% for i in users %}
+          <tr class='user'>
+              <td>{{ i.id }}</td>
+              <td>{{ i.name }}</td>
+              <td>{{ i.phone }}</td>
+              <td>{{ i.email }}</td>
+              <td>{{ i.notes }}</td>
+          </tr>
+      {% endfor %}
+
+    </table>
+
+
+  </body>
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Sign up / Login Form</title>
+  <link rel="stylesheet" href="../static/css/signup.css">
+
+</head>
+
+
+	<header>
+		<div class="container">
+		  <div class="logo">
+			<img src="../static/img/logo.png" alt="Logo" />
+			<h3>SAMANTHA</h3>
+
+		  </div>
+		</div>
+	</header>
+	<div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form method="POST" action="" class="sign-up-form">
+
+					<label for="chk" aria-hidden="true">Registration</label>
+					<input type="username" name="username" placeholder="Email" required="">
+					<input type="password1" name="password1" placeholder="Password" required="">
+					<input type="password2" name="password2" placeholder="Please repeat your password" required="">
+
+					{% csrf_token %}
+
+					<button>Register</button>
+										<button type="reset">Reset</button>
+
+									{% if error %}
+<div>
+    <mark>{{ error }}</mark>
+</div>
+{% endif %}
+				</form>
+
+
+
+			</div>
+
+	</div>
+{% endblock %}
