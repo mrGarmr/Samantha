@@ -75,7 +75,7 @@ class State(pc.State):
         outfile = f".web/public/{file.filename}"
         if file.filename:
             ext = file.filename.split('.')[-1]
-            if ext not in ['png', 'gif', 'jpeg', 'jpg', 'svg']:
+            if ext not in ['png', 'gif', 'jpeg', 'jpg', 'svg', 'webp']:
                 return pc.window_alert("This is not a picture!\nTry again!")
         # print(self.image_made, self.image_processing)
         # Save the file.
@@ -95,9 +95,9 @@ class State(pc.State):
             self.image_processing = False
             self.image_made = True
             # print(self.image_made, self.image_processing)
-        except Exception:
+        except Exception as err:
             self.image_processing = False
-            return pc.window_alert("Error with Samantha Execution.")
+            return pc.window_alert(f"Error with Samantha Execution: {err}")
 
 
 def index():
